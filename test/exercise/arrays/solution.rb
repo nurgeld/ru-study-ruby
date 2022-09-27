@@ -3,11 +3,12 @@ module Exercise
     class << self
       def qsort(array)
         return [] if array.empty?
+
         pivot = array.first
-        rest = array[1..-1]
+        rest = array[1..]
         left = rest.select { |el| el <= pivot }
         right = rest.select { |el| el > pivot }
-        qsort(left).concat([pivot], qsort(right)) 
+        qsort(left).concat([pivot], qsort(right))
       end
 
       def replace(array)
