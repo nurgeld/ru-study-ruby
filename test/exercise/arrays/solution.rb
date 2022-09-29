@@ -1,38 +1,26 @@
 module Exercise
   module Arrays
     class << self
-      def qsort(array)
-        return [] if array.empty?
-
-        pivot = array.first
-        rest = array[1..]
-        left = rest.select { |el| el <= pivot }
-        right = rest.select { |el| el > pivot }
-        qsort(left).concat([pivot], qsort(right))
+      def get_max(array)
+        max = array.first
+        array.each { |el| max = el if el > max }
+        max
       end
 
       def replace(array)
-        max = qsort(array).last
+        max = get_max(array)
         array.map { |el| el.positive? ? max : el }
       end
 
-      def search(array, query)
-        def bin_search(arr, low, high, query)
-          if high >= low
-            mid = (high + low) / 2
-            return mid if arr[mid] == query
+      def search(array, query, low = 0, high = nil)
+        high = array.size - 1 if high.nil?
 
-            if arr[mid] > query
-              bin_search(arr, low, mid - 1, query)
-            else
-              bin_search(arr, mid + 1, high, query)
-            end
-          else
-            -1
-          end
-        end
+        return -1 if low > high
 
-        bin_search(array, 0, array.size - 1, query)
+        mid = (low + high) / 2
+        return mid if query == array[mid]
+
+        query < array[mid] ? search(array, query, low, mid - 1) : search(array, query, mid + 1, high)
       end
     end
   end
