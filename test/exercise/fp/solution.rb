@@ -17,8 +17,17 @@ module Exercise
         sum_of_ratings / films_count
       end
 
-      def chars_count(_films, _threshold)
-        0
+      def chars_count(films, threshold)
+        rated_films = films.select do |row|
+          !row['rating_kinopoisk'].nil? &&
+            row['rating_kinopoisk'].to_f >= threshold
+        end
+        film_names = rated_films.map { |film| film['name'] }
+
+        film_names.reduce(0) do |count, name|
+          count += name.chars.select { |char| char == 'и' }.size
+          count
+        end
       end
     end
   end
