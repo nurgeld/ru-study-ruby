@@ -7,7 +7,7 @@ module Exercise
       # Написать свою функцию my_each
       def my_each(&func)
         i = 0
-        while i < self.size
+        while i < size
           func.call(self[i])
           i += 1
         end
@@ -15,7 +15,15 @@ module Exercise
       end
 
       # Написать свою функцию my_map
-      def my_map; end
+      def my_map(&func)
+        result = []
+        i = 0
+        while i < size
+          result << func.call(self[i])
+          i += 1
+        end
+        self
+      end
 
       # Написать свою функцию my_compact
       def my_compact; end
