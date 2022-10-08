@@ -16,17 +16,25 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map(&func)
-        result = []
+        result = MyArray.new
         i = 0
         while i < size
           result << func.call(self[i])
           i += 1
         end
-        self
+        result
       end
 
       # Написать свою функцию my_compact
-      def my_compact; end
+      def my_compact
+        result = MyArray.new
+        i = 0
+        while i < size
+          result << self[i] if !self[i].nil?
+          i += 1
+        end
+        result
+      end
 
       # Написать свою функцию my_reduce
       def my_reduce; end
