@@ -30,14 +30,25 @@ module Exercise
         result = MyArray.new
         i = 0
         while i < size
-          result << self[i] if !self[i].nil?
+          result << self[i] unless self[i].nil?
           i += 1
         end
         result
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce; end
+      def my_reduce(acc = nil, &func)
+        i = 0
+        if acc.nil?
+          acc = first
+          i = 1
+        end
+        while i < size
+          acc = func.call(acc, self[i])
+          i += 1
+        end
+        acc
+      end
     end
   end
 end
