@@ -6,10 +6,9 @@ module Exercise
 
       # Написать свою функцию my_each
       def my_each(&func)
-        i = 0
-        while i < size
-          func.call(self[i])
-          i += 1
+        unless self.empty?
+          func.call(first)
+          MyArray.new(self[1..]).my_each(&func)
         end
         self
       end
