@@ -7,7 +7,7 @@ module Exercise
       # Написать свою функцию my_each
       def my_each(&func)
         unless empty?
-          func.call(first)
+          yield first
           MyArray.new(self[1..]).my_each(&func)
         end
         self
@@ -15,13 +15,10 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map(&func)
-        result = MyArray.new
-        i = 0
-        while i < size
-          result << func.call(self[i])
-          i += 1
+        func = lambda do |memo, el|
+          memo << (yield el)
         end
-        result
+        my_reduce(MyArray.new, &func)
       end
 
       # Написать свою функцию my_compact
