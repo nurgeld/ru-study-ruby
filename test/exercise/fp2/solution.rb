@@ -23,13 +23,11 @@ module Exercise
 
       # Написать свою функцию my_compact
       def my_compact
-        result = MyArray.new
-        i = 0
-        while i < size
-          result << self[i] unless self[i].nil?
-          i += 1
+        func = lambda do |memo, el|
+          memo << el unless el.nil?
+          memo
         end
-        result
+        my_reduce(MyArray.new, &func)
       end
 
       # Написать свою функцию my_reduce
