@@ -14,7 +14,7 @@ module Exercise
       end
 
       # Написать свою функцию my_map
-      def my_map(&func)
+      def my_map
         func = lambda do |memo, el|
           memo << (yield el)
         end
