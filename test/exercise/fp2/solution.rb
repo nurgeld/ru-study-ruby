@@ -6,7 +6,7 @@ module Exercise
 
       # Написать свою функцию my_each
       def my_each(&func)
-        unless self.empty?
+        unless empty?
           func.call(first)
           MyArray.new(self[1..]).my_each(&func)
         end
@@ -37,16 +37,11 @@ module Exercise
 
       # Написать свою функцию my_reduce
       def my_reduce(acc = nil, &func)
-        i = 0
-        if acc.nil?
-          acc = first
-          i = 1
+        if size == 1
+          return acc.nil? ? first : (yield acc, first)
         end
-        while i < size
-          acc = func.call(acc, self[i])
-          i += 1
-        end
-        acc
+
+        (yield MyArray.new(self[0..-2]).my_reduce(acc, &func), self[-1])
       end
     end
   end
