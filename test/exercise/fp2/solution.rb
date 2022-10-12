@@ -6,10 +6,9 @@ module Exercise
 
       # Написать свою функцию my_each
       def my_each(&func)
-        unless empty?
-          yield first
-          MyArray.new(self[1..]).my_each(&func)
-        end
+        return if empty?
+        yield first
+        MyArray.new(self[1..]).my_each(&func)
         self
       end
 
